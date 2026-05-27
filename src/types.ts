@@ -1,0 +1,1 @@
+export type Tab = 'dashboard' | 'calendar' | 'bookings' | 'rooms' | 'customers' | 'housekeeping' | 'maintenance' | 'assets' | 'finance' | 'reports' | 'reviews' | 'documents' | 'ai-assistant' | 'settings';

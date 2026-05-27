@@ -1,0 +1,6 @@
+{
+  "name": "Boutique PMS",
+  "description": "Property Management System for boutique homestays and hotels featuring beautiful design and modular workflow cards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
