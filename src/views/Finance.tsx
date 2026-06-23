@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Filter, 
   Download, 
@@ -22,27 +22,34 @@ import {
   Wrench,
   Megaphone,
   Receipt,
-  Home
+  Home,
+  Trash2,
+  Edit3
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function Finance() {
-  const expenseCategories = [
-    { name: 'Phí OTA', desc: 'Airbnb, Booking, Agoda', amount: '32.250.000₫', icon: Globe, bg: 'bg-blue-100', text: 'text-blue-600' },
-    { name: 'Hoa hồng sale', desc: 'CTV & Đại lý', amount: '5.100.000₫', icon: Briefcase, bg: 'bg-indigo-100', text: 'text-indigo-600' },
-    { name: 'Dọn phòng', desc: 'Chi phí dọn dẹp nội bộ', amount: '4.500.000₫', icon: Wind, bg: 'bg-emerald-100', text: 'text-emerald-600' },
-    { name: 'Giặt là', desc: 'Outsource bên ngoài', amount: '3.950.000₫', icon: Shirt, bg: 'bg-teal-100', text: 'text-teal-600' },
-    { name: 'Điện', desc: 'Hóa đơn tháng', amount: '12.400.000₫', icon: Zap, bg: 'bg-yellow-100', text: 'text-yellow-600' },
-    { name: 'Nước', desc: 'Hóa đơn tháng', amount: '3.400.000₫', icon: Droplets, bg: 'bg-cyan-100', text: 'text-cyan-600' },
-    { name: 'Internet', desc: 'Viettel / VNPT', amount: '800.000₫', icon: Wifi, bg: 'bg-sky-100', text: 'text-sky-600' },
-    { name: 'Vật tư tiêu hao', desc: 'Sữa tắm, dầu gội, giấy...', amount: '2.500.000₫', icon: Box, bg: 'bg-orange-100', text: 'text-orange-600' },
-    { name: 'Sửa chữa', desc: 'Bảo trì trang thiết bị', amount: '1.200.000₫', icon: Wrench, bg: 'bg-stone-100', text: 'text-stone-600' },
-    { name: 'Quảng cáo', desc: 'Facebook, Google Ads', amount: '4.000.000₫', icon: Megaphone, bg: 'bg-pink-100', text: 'text-pink-600' },
-    { name: 'Lương nhân viên', desc: 'Fulltime & Part-time', amount: '16.000.000₫', icon: IdCard, bg: 'bg-purple-100', text: 'text-purple-600' },
-    { name: 'Thuế/phí', desc: 'Thuế môn bài, GTGT...', amount: '2.000.000₫', icon: Receipt, bg: 'bg-red-100', text: 'text-red-600' },
-    { name: 'Khấu hao tài sản', desc: 'Máy móc, nội thất', amount: '8.000.000₫', icon: Tag, bg: 'bg-slate-100', text: 'text-slate-600' },
-    { name: 'Tiền thuê nhà', desc: 'Mặt bằng kinh doanh', amount: '30.000.000₫', icon: Home, bg: 'bg-green-100', text: 'text-green-600' }
-  ];
+  const [expenseCategories, setExpenseCategories] = useState([
+    { id: 1, name: 'Phí OTA', desc: 'Airbnb, Booking, Agoda', amount: '32.250.000₫', icon: Globe, bg: 'bg-blue-100', text: 'text-blue-600' },
+    { id: 2, name: 'Hoa hồng sale', desc: 'CTV & Đại lý', amount: '5.100.000₫', icon: Briefcase, bg: 'bg-indigo-100', text: 'text-indigo-600' },
+    { id: 3, name: 'Dọn phòng', desc: 'Chi phí dọn dẹp nội bộ', amount: '4.500.000₫', icon: Wind, bg: 'bg-emerald-100', text: 'text-emerald-600' },
+    { id: 4, name: 'Giặt là', desc: 'Outsource bên ngoài', amount: '3.950.000₫', icon: Shirt, bg: 'bg-teal-100', text: 'text-teal-600' },
+    { id: 5, name: 'Điện', desc: 'Hóa đơn tháng', amount: '12.400.000₫', icon: Zap, bg: 'bg-yellow-100', text: 'text-yellow-600' },
+    { id: 6, name: 'Nước', desc: 'Hóa đơn tháng', amount: '3.400.000₫', icon: Droplets, bg: 'bg-cyan-100', text: 'text-cyan-600' },
+    { id: 7, name: 'Internet', desc: 'Viettel / VNPT', amount: '800.000₫', icon: Wifi, bg: 'bg-sky-100', text: 'text-sky-600' },
+    { id: 8, name: 'Vật tư tiêu hao', desc: 'Sữa tắm, dầu gội, giấy...', amount: '2.500.000₫', icon: Box, bg: 'bg-orange-100', text: 'text-orange-600' },
+    { id: 9, name: 'Sửa chữa', desc: 'Bảo trì trang thiết bị', amount: '1.200.000₫', icon: Wrench, bg: 'bg-stone-100', text: 'text-stone-600' },
+    { id: 10, name: 'Quảng cáo', desc: 'Facebook, Google Ads', amount: '4.000.000₫', icon: Megaphone, bg: 'bg-pink-100', text: 'text-pink-600' },
+    { id: 11, name: 'Lương nhân viên', desc: 'Fulltime & Part-time', amount: '16.000.000₫', icon: IdCard, bg: 'bg-purple-100', text: 'text-purple-600' },
+    { id: 12, name: 'Thuế/phí', desc: 'Thuế môn bài, GTGT...', amount: '2.000.000₫', icon: Receipt, bg: 'bg-red-100', text: 'text-red-600' },
+    { id: 13, name: 'Khấu hao tài sản', desc: 'Máy móc, nội thất', amount: '8.000.000₫', icon: Tag, bg: 'bg-slate-100', text: 'text-slate-600' },
+    { id: 14, name: 'Tiền thuê nhà', desc: 'Mặt bằng kinh doanh', amount: '30.000.000₫', icon: Home, bg: 'bg-green-100', text: 'text-green-600' }
+  ]);
+
+  const deleteExpense = (id: number) => {
+    setExpenseCategories(expenseCategories.filter(item => item.id !== id));
+  };
+
 
   return (
     <motion.div 
@@ -153,8 +160,8 @@ export function Finance() {
             <span className="text-sm text-on-surface-variant font-medium">Tổng: 72.500.000₫</span>
           </div>
           <div className="divide-y divide-outline-variant flex-1 overflow-y-auto max-h-[400px]">
-            {expenseCategories.map((item, idx) => (
-              <div key={idx} className="p-4 hover:bg-surface-container-low transition-colors flex items-center justify-between">
+            {expenseCategories.map((item) => (
+              <div key={item.id} className="p-4 hover:bg-surface-container-low transition-colors flex items-center justify-between group">
                 <div className="flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center ${item.bg} ${item.text}`}>
                     <item.icon size={20} />
@@ -164,8 +171,21 @@ export function Finance() {
                     <p className="text-xs text-on-surface-variant">{item.desc}</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold text-on-surface">{item.amount}</p>
+                <div className="flex items-center gap-4">
+                  <div className="text-right group-hover:hidden sm:block">
+                    <p className="font-bold text-on-surface">{item.amount}</p>
+                  </div>
+                  <div className="hidden group-hover:flex items-center gap-2">
+                    <button className="p-1.5 text-on-surface-variant hover:text-primary bg-surface-container rounded-lg transition-colors">
+                      <Edit3 size={16} />
+                    </button>
+                    <button 
+                      onClick={() => deleteExpense(item.id)}
+                      className="p-1.5 text-on-surface-variant hover:text-error bg-surface-container rounded-lg transition-colors"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -201,11 +221,12 @@ export function Finance() {
           </div>
 
           <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col gap-1 mb-4">
               <h4 className="text-lg font-semibold text-on-surface flex items-center gap-2">
                 <ClipboardX className="text-error" size={20} />
                 Công nợ cần trả
               </h4>
+              <p className="text-xs text-on-surface-variant">Tự động tổng hợp từ <span className="font-medium">Hệ thống Đặt phòng</span> và <span className="font-medium">Quản lý Đối tác</span></p>
             </div>
             <div className="space-y-4 text-sm mt-6">
               <div className="flex justify-between items-center">

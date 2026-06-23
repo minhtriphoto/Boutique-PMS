@@ -22,10 +22,10 @@ export function Housekeeping() {
   const [editingTask, setEditingTask] = useState<any>(null);
 
   const [tasks, setTasks] = useState([
-    { id: 1, room: 'P.204', type: 'Dọn toàn diện (Full Clean)', priority: 'Cao', status: 'Đang chờ', icon: Wind },
+    { id: 1, room: 'P.202', type: 'Dọn toàn diện (Full Clean)', priority: 'Cao', status: 'Đang chờ', icon: Wind },
     { id: 2, room: 'P.301', type: 'Bảo trì: Vòi sen rỉ nước', priority: 'Thường', status: 'Đang chờ', icon: Wrench },
     { id: 3, room: 'P.102', type: 'Dọn nhanh (Quick Clean)', priority: 'Thường', status: 'Đang làm', icon: RefreshCw },
-    { id: 4, room: 'P.405', type: 'Dọn toàn diện', priority: 'Thường', status: 'Chờ kiểm tra', icon: CheckSquare },
+    { id: 4, room: 'Villa 1', type: 'Dọn toàn diện', priority: 'Thường', status: 'Chờ kiểm tra', icon: CheckSquare },
   ]);
 
   const handleDelete = (id: number) => setTasks(tasks.filter(t => t.id !== id));
@@ -204,23 +204,13 @@ export function Housekeeping() {
           <div className="space-y-2">
             <label className="text-sm font-semibold text-on-surface">Phòng</label>
             <select defaultValue={editingTask?.room} className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none">
-              <optgroup label="Tầng 1">
+              <optgroup label="Phòng/Căn">
                 <option value="P.101">P.101</option>
                 <option value="P.102">P.102</option>
-                <option value="P.105">P.105</option>
-              </optgroup>
-              <optgroup label="Tầng 2">
                 <option value="P.201">P.201</option>
-                <option value="P.204">P.204</option>
-              </optgroup>
-              <optgroup label="Tầng 3">
+                <option value="P.202">P.202</option>
                 <option value="P.301">P.301</option>
-              </optgroup>
-              <optgroup label="Tầng 4">
-                <option value="P.405">P.405</option>
-              </optgroup>
-              <optgroup label="Villa">
-                <option value="Villa-1">Villa-1</option>
+                <option value="Villa 1">Villa 1</option>
               </optgroup>
             </select>
           </div>

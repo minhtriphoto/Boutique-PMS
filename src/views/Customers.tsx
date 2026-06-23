@@ -10,6 +10,13 @@ export function Customers() {
   const [searchTerm, setSearchTerm] = useState('');
   const [typeFilter, setTypeFilter] = useState('Tất cả');
 
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    type: 'Standard'
+  });
+
   const [customers, setCustomers] = useState([
     { id: 1, name: 'Nguyễn Văn A', initials: 'NV', type: 'VIP', phone: '0901 234 501', email: 'user1@example.com', bookings: 3, spend: '1.5' },
     { id: 2, name: 'Trần Thị B', initials: 'TB', type: 'Standard', phone: '0901 234 502', email: 'user2@example.com', bookings: 5, spend: '3.0' },
@@ -25,12 +32,57 @@ export function Customers() {
 
   const openEditModal = (customer: any) => {
     setEditingCustomer(customer);
+    setFormData({
+      name: customer.name,
+      phone: customer.phone,
+      email: customer.email,
+      type: customer.type
+    });
+    setIsAddModalOpen(true);
+  };
+
+  const openAddModal = () => {
+    setEditingCustomer(null);
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      type: 'Standard'
+    });
     setIsAddModalOpen(true);
   };
 
   const closeModal = () => {
     setIsAddModalOpen(false);
     setEditingCustomer(null);
+  };
+
+  const handleSaveCustomer = () => {
+    if (editingCustomer) {
+      setCustomers(customers.map(c => c.id === editingCustomer.id ? {
+        ...c,
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        type: formData.type,
+        initials: (formData.name || 'KM').split(' ').map(n => n[0] || '').join('').slice(0, 2).toUpperCase()
+      } : c));
+    } else {
+      setCustomers([
+        ...customers,
+        {
+          id: Math.random(),
+          name: formData.name || 'Khách mới',
+          initials: (formData.name || 'KM').split(' ').map(n => n[0] || '').join('').slice(0, 2).toUpperCase(),
+          phone: formData.phone || 'Chưa có',
+          email: formData.email || '',
+          type: formData.type || 'Standard',
+          bookings: 0,
+          spend: '0'
+        }
+      ]);
+    }
+    closeModal();
   };
 
   const filteredCustomers = customers.filter(c => {
@@ -54,7 +106,7 @@ export function Customers() {
         </div>
         <div className="flex gap-3">
           <button 
-            onClick={() => { setEditingCustomer(null); setIsAddModalOpen(true); }}
+            onClick={openAddModal}
             className="flex items-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-xl text-sm font-medium hover:opacity-90 transition-opacity shadow-sm"
           >
             <Plus size={18} />
@@ -149,25 +201,43 @@ export function Customers() {
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-semibold text-on-surface">Họ và tên</label>
-            <input type="text" defaultValue={editingCustomer?.name} className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="VD: Nguyễn Văn A" />
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+              placeholder="VD: Nguyễn Văn A"
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-on-surface">Số điện thoại</label>
-              <input type="text" defaultValue={editingCustomer?.phone} className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="VD: 0901234567" />
+              <input
+                type="text"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+                placeholder="VD: 0901234567"
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-semibold text-on-surface">Email</label>
-              <input type="email" defaultValue={editingCustomer?.email} className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="VD: abc@gmail.com" />
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+                placeholder="VD: abc@gmail.com"
+              />
             </div>
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-on-surface">Địa chỉ</label>
-            <input type="text" className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none" placeholder="Nhập địa chỉ" />
-          </div>
-          <div className="space-y-2">
             <label className="text-sm font-semibold text-on-surface">Loại khách hàng</label>
-            <select defaultValue={editingCustomer?.type} className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none">
+            <select
+              value={formData.type}
+              onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+              className="w-full px-4 py-2 bg-surface border border-outline-variant rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
+            >
               <option value="Standard">Standard</option>
               <option value="VIP">VIP</option>
             </select>
@@ -180,7 +250,7 @@ export function Customers() {
               Hủy
             </button>
             <button
-              onClick={closeModal}
+              onClick={handleSaveCustomer}
               className="px-6 py-2.5 bg-primary text-on-primary rounded-xl font-semibold hover:opacity-90 transition-opacity"
             >
               {editingCustomer ? "Lưu thông tin" : "Thêm khách hàng"}
